@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --white: #FFF;
+    --black: #000;
+    --gray: #9B9C9E;
+    --light-gray: #F1F1F1;
+    --alpha-black: #00000070;
+    --primary: #FE5B68;
+    --dark-primary: #A64C60;
+    --secondary: #3D495E;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+html {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    background-image: linear-gradient(to top, var(--light-gray) 0%, var(--white) 100%);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+}

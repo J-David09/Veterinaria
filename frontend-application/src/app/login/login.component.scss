@@ -1,0 +1,131 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 12.3rem);
+}
+
+.loginform {
+    background-color: var(--light-gray);
+    width: min(70rem, 90%);        
+    padding: 2rem;
+    border-radius: 1rem;    
+    -webkit-box-shadow: 0px 0px 9px 0px var(--secondary);
+    -moz-box-shadow: 0px 0px 9px 0px var(--secondary);
+    box-shadow: 0px 0px 9px 0px var(--secondary);
+}
+
+.loginfieldset {
+    border: none;
+}
+
+.loginfieldset__legend {
+    color: var(--primary);
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.loginfieldset__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.loginfieldset__inputs--image{
+    animation: transitionLeft .75s;  
+}
+
+@media (min-width: 768px) {
+    .loginfieldset__inputs {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        justify-content: center;
+        column-gap: 2rem;
+    }
+    
+    .loginfieldset__inputs--image {
+        background-image: url("../../img/vet-login.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        grid-column: 2 /3;
+        grid-row: 1 / span 3;
+        height: 100%;
+        width: 100%;        
+    }
+}
+
+.inputbox{
+    position: relative;
+}
+
+.inputbox__field,
+.loginfieldset__inputs--submit {
+    padding: 1.5rem;    
+    color: var(--dark-primary);
+    border-radius: .8rem;
+}
+
+.inputbox__field{  
+    padding: 1rem;
+    font-size: 1.6rem;
+    outline: none;
+    width: 100%;  
+    border: solid .1rem var(--dark-primary);
+    background-color: transparent;
+    transition: 0.5s;
+}
+
+.inputbox__placeholder{
+    position: absolute;
+    left: 0;
+    color: var(--dark-primary);
+    padding: 1rem;
+    pointer-events: none;
+    font-size: 1.6rem;
+    transition: 0.5s;
+}
+
+.inputbox__field:valid ~ .inputbox__placeholder,
+.inputbox__field:focus ~ .inputbox__placeholder{
+    color: var(--white);
+    transform: translateX(1rem) translateY(-1rem);
+    font-size: 1.2rem;
+    padding: 0 1rem;
+    background-color: var(--primary);    
+    border-radius: .6rem;
+    letter-spacing: .15rem;
+}
+
+.inputbox__field:valid,
+.inputbox__field:focus{
+    border: .1rem solid var(--primary);
+}
+
+.loginfieldset__inputs--submit{
+    border: none;
+    background-color: var(--primary);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--white);
+    transition: .3s;
+}
+
+.loginfieldset__inputs--submit:hover{    
+    cursor: pointer;
+    background-color:  var(--dark-primary);
+}
+
+@keyframes transitionLeft{
+    from{
+        opacity: 0;
+        background-position: right;
+    }
+
+    to{
+        opacity: 1;
+        background-position: center;
+    }
+}
