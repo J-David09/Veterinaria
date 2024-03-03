@@ -1,0 +1,23 @@
+.navbar {
+    padding: 2rem;
+    background-color: var(--primary);
+}
+
+.navbar__link {
+    font-size: 2rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--white);
+}
+
+@media (min-width: 768px) {
+    .navbar__link {
+        font-size: 3rem;
+    }
+}
+
+.footer {
+    font-size: .8rem;
+    text-align: center;
+    color: var(--gray);
+}
