@@ -1,15 +1,16 @@
-<form action="" class="loginform">
+<form (ngSubmit)="onSubmit()" class="loginform">
     <fieldset class="loginfieldset">
         <legend class="loginfieldset__legend">Admin Login Panel</legend>
         <div class="loginfieldset__inputs">
             <div class="inputbox">
-                <input type="text" required="required" name="username" class="inputbox__field">
+                <input [(ngModel)]="username" type="text" required="required" name="username" class="inputbox__field">
                 <span class="inputbox__placeholder">Username</span>
             </div>
             <div class="inputbox">
-                <input type="password" required="required" name="password" class="inputbox__field">
+                <input [(ngModel)]="password" type="password" required="required" name="password" class="inputbox__field">
                 <span class="inputbox__placeholder">Password</span>
             </div>
+            <span *ngIf="!isUserValid" style="color: rgb(221,44,0);">{{message}}</span>
             <input type="submit" class="loginfieldset__inputs--submit" value="Login">
             <div class="loginfieldset__inputs--image"></div>
         </div>

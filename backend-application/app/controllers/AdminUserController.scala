@@ -18,11 +18,11 @@ class AdminUserController @Inject()( cc: ControllerComponents, adminUserReposito
       case Some(user) =>
         val jsonReports = Json.obj(
           "data" -> user,
-          "message" -> "Successfully retrieved reports."
+          "message" -> "Successfully logged in."
         )
         Ok(jsonReports)
-      case None =>
-        NotFound(Json.obj("data" -> null, "message" -> "User or password invalid"))
+      case _ =>
+        InternalServerError(Json.obj("data" -> "", "message" -> "User or password invalid."))
     }
   }
 
