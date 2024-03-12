@@ -1,5 +1,10 @@
 <nav class="navbar">
-    <a href="./app.component.html" class="navbar__link">PETS S.A Manage Center</a>
+    <a class="navbar__link">PETS S.A Manage Center</a>
+    <ng-container *ngIf="!isLoginPage()" class="links">
+        <a (click)="navigateClientes()" class="navbar__link">Clientes</a>
+        <a (click)="navigateMascotas()" class="navbar__link">Mascotas</a>
+        <a (click)="navigateMedicamentos()" class="navbar__link">Medicamentos</a>
+    </ng-container>
 </nav>
 <div class="main-content">
     <router-outlet></router-outlet>
