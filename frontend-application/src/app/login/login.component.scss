@@ -1,13 +1,6 @@
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100% - 12.3rem);
-}
-
 .loginform {
     background-color: var(--light-gray);
-    width: min(70rem, 90%);        
+    width: min(70rem, 100%);        
     padding: 2rem;
     border-radius: 1rem;    
     -webkit-box-shadow: 0px 0px 9px 0px var(--secondary);

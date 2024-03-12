@@ -33,3 +33,14 @@ body {
     line-height: 1.5;
     margin: 0;
 }
+
+app-login,
+app-home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+app-home{
+    flex-direction: column;
+}
