@@ -9,6 +9,27 @@ GET     /                           controllers.HomeController.index()
 GET     /dbInit                     controllers.HomeController.dbInit
 
 POST    /login/:user/:password      controllers.AdminUserController.login(user, password)
+#CLIENTE ENDPOINTS
+GET     /cliente/getOne/:id         controllers.ClienteController.getOne(id)
+
+GET     /cliente/getAll             controllers.ClienteController.getAll
+
+POST    /cliente/create             controllers.ClienteController.create
+
+POST    /cliente/update/:id         controllers.ClienteController.update(id)
+
+DELETE  /cliente/delete/:id         controllers.ClienteController.delete(id)
+
+#MASCOTA ENDPOINTS
+GET     /mascota/getOne/:id         controllers.MascotaController.getOne(id)
+
+GET     /mascota/getAll             controllers.MascotaController.getAll
+
+POST    /mascota/create             controllers.MascotaController.create
+
+POST    /mascota/update/:id         controllers.MascotaController.update(id)
+
+DELETE  /mascota/delete/:id         controllers.MascotaController.delete(id)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
