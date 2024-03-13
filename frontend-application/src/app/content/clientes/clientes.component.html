@@ -1,5 +1,5 @@
 <div class="button-container">
-    <button (click)="openModal()" class="add-button">Add New
+    <button (click)="openAddForm()" class="add-button">Add New
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
@@ -14,6 +14,7 @@
     <table>
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Name</th>
                 <th>Last Name</th>
                 <th>Address</th>
@@ -23,12 +24,13 @@
         </thead>
         <tbody>
             <tr>
+                <td>1000230231</td>
                 <td>Andres</td>
                 <td>Rodriguez</td>
                 <td>cra 59c</td>
                 <td>3014887754</td>
                 <td>
-                    <button>
+                    <button (click)="openInfoForm()">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle"
                             width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -38,7 +40,7 @@
                             <path d="M11 12h1v4h1" />
                         </svg>
                     </button>
-                    <button>
+                    <button (click)="openEditForm()">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil-up"
                             width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -49,7 +51,7 @@
                             <path d="M22 19l-3 -3l-3 3" />
                         </svg>
                     </button>
-                    <button>
+                    <button (click)="openDeleteForm()">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24"
                             height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -67,20 +69,21 @@
     </table>
 </div>
 
-<div class="addModal" [ngClass]="{'visible':isModal}">
-    <form class="addForm" [ngClass]="{'visibleForm':isModal}" action="">
-        <div class="addForm__exit" (click)="closeModal()">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24"
-                viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round"
-                stroke-linejoin="round">
+<div class="modal" [ngClass]="{'visible':isAdd}">
+    <!-- Add -->
+    <form class="modal__form" [ngClass]="{'visibleForm':isAdd}">
+        <div class="modal__form--exit">
+            <svg (click)="closeModal()" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
+                width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <path d="M18 6l-12 12" />
                 <path d="M6 6l12 12" />
             </svg>
         </div>
-        <fieldset class="addfieldset">
-            <legend class="addfieldset__legend">Add new client</legend>
-            <div class="addfieldset__inputs">
+        <fieldset class="fieldset">
+            <legend class="fieldset__legend">Add new client</legend>
+            <div class="fieldset__inputs">
                 <div class="inputbox">
                     <input type="text" required="required" name="username" class="inputbox__field">
                     <span class="inputbox__placeholder">Name</span>
@@ -98,7 +101,162 @@
                     <span class="inputbox__placeholder">Phone</span>
                 </div>
                 <!-- <span *ngIf="!isUserValid" style="color: rgb(221,44,0);">{{message}}</span> -->
-                <input type="submit" class="addfieldset__inputs--submit" value="Add">
+                <input type="submit" class="fieldset__inputs--submit" value="Add">
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<!-- Info -->
+<div class="modal" [ngClass]="{'visible':isInfo}">
+    <form class="modal__form" [ngClass]="{'visibleForm':isInfo}" action="">
+        <div class="modal__form--exit">
+            <svg (click)="closeModal()" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
+                width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M18 6l-12 12" />
+                <path d="M6 6l12 12" />
+            </svg>
+        </div>
+        <fieldset class="fieldset">
+            <legend class="fieldset__legend">Info <!-- {{name}} --></legend>
+            <div class="fieldset__inputs">
+                <div class="infoLabel">
+                    <h2>Client Id</h2>
+                    <p><!-- {{id}} -->Hola</p>
+                </div>
+                <div class="infoLabel">
+                    <h2>Client Name</h2>
+                    <p><!-- {{nombre}} --></p>
+                </div>
+                <div class="infoLabel">
+                    <h2>CLient Last Name</h2>
+                    <p><!-- {{apellido}} --></p>
+                </div>
+                <div class="infoLabel">
+                    <h2>Client Address</h2>
+                    <p><!-- {{direccion}} --></p>
+                </div>
+                <div class="infoLabel">
+                    <h2>Client Phone</h2>
+                    <p><!-- {{telefono}} --></p>
+                </div>
+                <div class="infoLabel">
+                    <h2>Pet Id</h2>
+                    <p><!-- {{pet.id}} --></p>
+                </div>
+                <div class="infoLabel">
+                    <h2>Pet Name</h2>
+                    <p><!-- {{mascota.nombre}} --></p>
+                </div>
+                <div class="infoLabel">
+                    <h2>Pet Breed</h2>
+                    <p><!-- {{mascota.raza}} --></p>
+                </div>
+                <div class="infoLabel">
+                    <h2>Pet Age</h2>
+                    <p><!-- {{mascota.edad}} --></p>
+                </div>
+                <div class="infoLabel">
+                    <h2>Pet Weight</h2>
+                    <p><!-- mascota.peso --></p>
+                </div>
+                <!-- Ciclo (porque una mascota puede tener varios medicamentos) ngfor* -->
+                <div class="infoLabel">
+                    <h2>Medication Id</h2>
+                    <p><!-- {{medicamento.id}} --></p>
+                </div>
+                <div class="infoLabel">
+                    <h2>Medication Name</h2>
+                    <p><!-- {{medicamento.nombre}} --></p>
+                </div>
+                <div class="infoLabel">
+                    <h2>Medication Description</h2>
+                    <p><!-- {{medicamento.descripcion}} --></p>
+                </div>
+                <div class="infoLabel">
+                    <h2>Medication Dosage</h2>
+                    <p><!-- {{medicamento.dosis}} --></p>
+                </div>
+                <!-- <span *ngIf="!isUserValid" style="color: rgb(221,44,0);">{{message}}</span> -->
+                <input type="submit" class="fieldset__inputs--submit" value="Add">
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<!-- Edit -->
+<div class="modal" [ngClass]="{'visible':isEdit}">
+    <form class="modal__form" [ngClass]="{'visibleForm':isEdit}" action="">
+        <div class="modal__form--exit">
+            <svg (click)="closeModal()" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
+                width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M18 6l-12 12" />
+                <path d="M6 6l12 12" />
+            </svg>
+        </div>
+        <fieldset class="fieldset">
+            <legend class="fieldset__legend">Edit <!-- nombre --> info</legend>
+            <div class="fieldset__inputs">
+                <div class="inputbox">
+                    <input type="text" required="required" name="username" class="inputbox__field">
+                    <span class="inputbox__placeholder">Name</span>
+                </div>
+                <div class="inputbox">
+                    <input type="text" required="required" name="lastname" class="inputbox__field">
+                    <span class="inputbox__placeholder">Last Name</span>
+                </div>
+                <div class="inputbox">
+                    <input type="text" required="required" name="address" class="inputbox__field">
+                    <span class="inputbox__placeholder">Address</span>
+                </div>
+                <div class="inputbox">
+                    <input type="tel number" required="required" name="phone" class="inputbox__field">
+                    <span class="inputbox__placeholder">Phone</span>
+                </div>
+                <!-- <span *ngIf="!isUserValid" style="color: rgb(221,44,0);">{{message}}</span> -->
+                <input type="submit" class="fieldset__inputs--submit" value="Save">
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<!-- Delete -->
+<div class="modal" [ngClass]="{'visible':isDelete}">
+    <form class="modal__form" [ngClass]="{'visibleForm':isDelete}" action="">
+        <div class="modal__form--exit">
+            <svg (click)="closeModal()" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
+                width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M18 6l-12 12" />
+                <path d="M6 6l12 12" />
+            </svg>
+        </div>
+        <fieldset class="fieldset">
+            <legend class="fieldset__legend">Add new client</legend>
+            <div class="fieldset__inputs">
+                <div class="inputbox">
+                    <input type="text" required="required" name="username" class="inputbox__field">
+                    <span class="inputbox__placeholder">Name</span>
+                </div>
+                <div class="inputbox">
+                    <input type="text" required="required" name="lastname" class="inputbox__field">
+                    <span class="inputbox__placeholder">Last Name</span>
+                </div>
+                <div class="inputbox">
+                    <input type="text" required="required" name="address" class="inputbox__field">
+                    <span class="inputbox__placeholder">Address</span>
+                </div>
+                <div class="inputbox">
+                    <input type="tel number" required="required" name="phone" class="inputbox__field">
+                    <span class="inputbox__placeholder">Phone</span>
+                </div>
+                <!-- <span *ngIf="!isUserValid" style="color: rgb(221,44,0);">{{message}}</span> -->
+                <input type="submit" class="fieldset__inputs--submit" value="Add">
             </div>
         </fieldset>
     </form>
