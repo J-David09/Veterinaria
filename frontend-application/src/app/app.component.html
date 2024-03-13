@@ -1,10 +1,12 @@
 <nav class="navbar">
-    <a class="navbar__link">PETS S.A Manage Center</a>
-    <ng-container *ngIf="!isLoginPage()" class="links">
-        <a (click)="navigateClientes()" class="navbar__link">Clientes</a>
-        <a (click)="navigateMascotas()" class="navbar__link">Mascotas</a>
-        <a (click)="navigateMedicamentos()" class="navbar__link">Medicamentos</a>
-    </ng-container>
+    <a (click)="navigateHome()" class="navbar__brand">PETS S.A Manage Center</a>
+    <div class="links">
+        <ng-container *ngIf="!isLoginPage()">
+            <a (click)="navigateClientes()" class="link link__clients" [ngClass]="{'link--active':isClients}">Clientes</a>
+            <a (click)="navigateMascotas()" class="link link__pets" [ngClass]="{'link--active':isPets}">Mascotas</a>
+            <a (click)="navigateMedicamentos()" class="link link__farmacy" [ngClass]="{'link--active':isFarmacy}">Medicamentos</a>
+        </ng-container>
+    </div>
 </nav>
 <div class="main-content">
     <router-outlet></router-outlet>
