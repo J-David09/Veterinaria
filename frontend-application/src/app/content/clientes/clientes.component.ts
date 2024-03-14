@@ -15,6 +15,14 @@ export class ClientesComponent {
 
   clientes: Cliente[] = [];
 
+  currentClient : Cliente = {
+    id : 0,
+    nombre : "",
+    apellido: "",
+    direccion: "",
+    telefono: ""
+  }
+
   constructor(private clienteService: ClienteService) { }
 
   ngOnInit() {
@@ -31,20 +39,56 @@ export class ClientesComponent {
     })
   }
 
+  editarUsuario (){
+    this.clienteService.editUser(this.currentClient.id, this.currentClient).subscribe(response => {
+      this.consultarUsuarios;
+      this.closeModal();
+    },
+    error => {
+      alert("Error al actualizar usuario");
+      this.closeModal;
+    })
+  }
+
+  addUser (){
+    this.clienteService.addUser(this.currentClient).subscribe(response => {
+      this.consultarUsuarios();
+      this.closeModal();
+    },
+    error => {
+      alert("Error al crear el usuario");
+      this.closeModal;
+    })
+  }
+
+  delete () {
+    this.clienteService.delete(this.currentClient.id).subscribe(response => {
+      this.consultarUsuarios();
+      this.closeModal();
+    },
+    error => {
+      alert("Error al eliminar cliente");
+      this.closeModal();
+    })
+  }
+
   openAddForm() {
     this.isAdd = true;
   }
 
-  openInfoForm() {
+  openInfoForm(cliente: Cliente) {
     this.isInfo = true;
+    this.currentClient = cliente
   }
 
-  openEditForm() {
+  openEditForm(cliente: Cliente) {
     this.isEdit = true;
+    this.currentClient = cliente
   }
 
-  openDeleteForm() {
+  openDeleteForm(cliente: Cliente) {
     this.isDelete = true;
+    this.currentClient = cliente
   }
 
   closeModal() {    
@@ -52,5 +96,12 @@ export class ClientesComponent {
     this.isInfo = false;
     this.isEdit = false;
     this.isDelete = false;
+    this.currentClient = {
+      id : 0,
+      nombre : "",
+      apellido: "",
+      direccion: "",
+      telefono: ""
+    }
   }
 }

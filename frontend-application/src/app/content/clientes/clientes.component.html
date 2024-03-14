@@ -30,7 +30,7 @@
                 <td>{{cliente.direccion}}</td>
                 <td>{{cliente.telefono}}</td>
                 <td>
-                    <button (click)="openInfoForm()">
+                    <button (click)="openInfoForm(cliente)">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle"
                             width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -40,7 +40,7 @@
                             <path d="M11 12h1v4h1" />
                         </svg>
                     </button>
-                    <button (click)="openEditForm()">
+                    <button (click)="openEditForm(cliente)">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil-up"
                             width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -51,7 +51,7 @@
                             <path d="M22 19l-3 -3l-3 3" />
                         </svg>
                     </button>
-                    <button (click)="openDeleteForm()">
+                    <button (click)="openDeleteForm(cliente)">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24"
                             height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -85,27 +85,27 @@
             <legend class="fieldset__legend">Add new client</legend>
             <div class="fieldset__inputs">
                 <div class="inputbox">
-                    <input type="text" required="required" name="id" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.id" type="number" required="required" name="id" class="inputbox__field">
                     <span class="inputbox__placeholder">Dni</span>
                 </div>
                 <div class="inputbox">
-                    <input type="text" required="required" name="username" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.nombre" type="text" required="required" name="username" class="inputbox__field">
                     <span class="inputbox__placeholder">Name</span>
                 </div>
                 <div class="inputbox">
-                    <input type="text" required="required" name="lastname" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.apellido" type="text" required="required" name="lastname" class="inputbox__field">
                     <span class="inputbox__placeholder">Last Name</span>
                 </div>
                 <div class="inputbox">
-                    <input type="text" required="required" name="address" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.direccion" type="text" required="required" name="address" class="inputbox__field">
                     <span class="inputbox__placeholder">Address</span>
                 </div>
                 <div class="inputbox">
-                    <input type="tel number" required="required" name="phone" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.telefono" type="tel number" required="required" name="phone" class="inputbox__field">
                     <span class="inputbox__placeholder">Phone</span>
                 </div>
                 <!-- <span *ngIf="!isUserValid" style="color: rgb(221,44,0);">{{message}}</span> -->
-                <input type="submit" class="fieldset__inputs--submit" value="Add">
+                <input (click)="addUser()" type="submit" class="fieldset__inputs--submit" value="Add">
             </div>
         </fieldset>
     </form>
@@ -206,27 +206,27 @@
             <legend class="fieldset__legend">Edit <!-- nombre --> info</legend>
             <div class="fieldset__inputs">
                 <div class="inputbox">
-                    <input type="text" required="required" name="id" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.id" type="text" required="required" name="id" class="inputbox__field">
                     <span class="inputbox__placeholder">Dni</span>
                 </div>
                 <div class="inputbox">
-                    <input type="text" required="required" name="username" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.nombre" type="text" required="required" name="username" class="inputbox__field">
                     <span class="inputbox__placeholder">Name</span>
                 </div>
                 <div class="inputbox">
-                    <input type="text" required="required" name="lastname" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.apellido" type="text" required="required" name="lastname" class="inputbox__field">
                     <span class="inputbox__placeholder">Last Name</span>
                 </div>
                 <div class="inputbox">
-                    <input type="text" required="required" name="address" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.direccion" type="text" required="required" name="address" class="inputbox__field">
                     <span class="inputbox__placeholder">Address</span>
                 </div>
                 <div class="inputbox">
-                    <input type="tel number" required="required" name="phone" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.telefono" type="tel number" required="required" name="phone" class="inputbox__field">
                     <span class="inputbox__placeholder">Phone</span>
                 </div>
                 <!-- <span *ngIf="!isUserValid" style="color: rgb(221,44,0);">{{message}}</span> -->
-                <input type="submit" class="fieldset__inputs--submit" value="Save">
+                <input (click)="editarUsuario()" type="submit" class="fieldset__inputs--submit" value="Save">
             </div>
         </fieldset>
     </form>
@@ -245,26 +245,10 @@
             </svg>
         </div>
         <fieldset class="fieldset">
-            <legend class="fieldset__legend">Add new client</legend>
+            <legend class="fieldset__legend">Are you sure?</legend>
             <div class="fieldset__inputs">
-                <div class="inputbox">
-                    <input type="text" required="required" name="username" class="inputbox__field">
-                    <span class="inputbox__placeholder">Name</span>
-                </div>
-                <div class="inputbox">
-                    <input type="text" required="required" name="lastname" class="inputbox__field">
-                    <span class="inputbox__placeholder">Last Name</span>
-                </div>
-                <div class="inputbox">
-                    <input type="text" required="required" name="address" class="inputbox__field">
-                    <span class="inputbox__placeholder">Address</span>
-                </div>
-                <div class="inputbox">
-                    <input type="tel number" required="required" name="phone" class="inputbox__field">
-                    <span class="inputbox__placeholder">Phone</span>
-                </div>
-                <!-- <span *ngIf="!isUserValid" style="color: rgb(221,44,0);">{{message}}</span> -->
-                <input type="submit" class="fieldset__inputs--submit" value="Add">
+                <h1>el cliente {{currentClient.nombre}} con dni {{currentClient.id}} sera elimindo</h1>
+                <input (click)="delete()" type="submit" class="fieldset__inputs--submit" value="Confirmar">
             </div>
         </fieldset>
     </form>
