@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Cliente } from 'src/app/interfaces/cliente';
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
   selector: 'app-clientes',
@@ -11,7 +13,23 @@ export class ClientesComponent {
   isEdit:boolean = false;
   isDelete:boolean = false;
 
-  constructor() { }
+  clientes: Cliente[] = [];
+
+  constructor(private clienteService: ClienteService) { }
+
+  ngOnInit() {
+    this.consultarUsuarios();
+  }
+
+  consultarUsuarios () {
+    this.clienteService.getAll().subscribe(response => {
+      this.clientes = response.data;
+      console.log(this.clientes);
+    },
+    error => {
+      alert("Error al consultar usuarios");
+    })
+  }
 
   openAddForm() {
     this.isAdd = true;
