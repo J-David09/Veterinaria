@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Cliente } from 'src/app/interfaces/cliente';
 import { Mascota } from 'src/app/interfaces/mascota';
 import { MascotaService } from 'src/app/services/mascota.service';
 
@@ -22,6 +23,14 @@ export class MascotasComponent {
     idCliente: 0,
     peso: 0,
     raza: ""
+  }
+
+  client : Cliente = {
+    id : 0,
+    nombre : "",
+    apellido: "",
+    direccion: "",
+    telefono: ""
   }
 
   constructor(private mascotaService: MascotaService) { }
@@ -73,6 +82,16 @@ export class MascotasComponent {
     })
   }
 
+  getOwner (id: number) {
+    this.mascotaService.getOwner(id).subscribe(response => {
+      this.client = response.data;
+    },
+    error => {
+      alert("Error al consultar cliente");
+      this.closeModal();
+    })
+  }
+
   openAddForm() {
     this.isAdd = true;
   }
@@ -80,6 +99,7 @@ export class MascotasComponent {
   openInfoForm(mascota: Mascota) {
     this.isInfo = true;
     this.currentMascota = mascota
+    this.getOwner(this.currentMascota.idCliente);
   }
 
   openEditForm(mascota: Mascota) {
@@ -104,6 +124,13 @@ export class MascotasComponent {
       idCliente: 0,
       peso: 0,
       raza: ""
+    }
+    this.client = {
+      id : 0,
+      nombre : "",
+      apellido: "",
+      direccion: "",
+      telefono: ""
     }
   }
 }

@@ -27,4 +27,8 @@ export class MascotaService {
   delete (id: number):  Observable<any> {
     return this.http.delete<any>(environment.urlBaseApi + "mascota/delete/" + id);
   }
+
+  getOwner (id: number):  Observable<any> {
+    return this.http.get<any>(environment.urlBaseApi + "cliente/getOne/" + id);
+  }
 }
