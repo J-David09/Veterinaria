@@ -43,6 +43,16 @@
                 <td>{{mascota.peso}}</td>
                 <td>{{mascota.raza}}</td>
                 <td>
+                    <button (click)="openAddMedicamentoForm(mascota)">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle"
+                            width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+                            <path d="M12 9h.01" />
+                            <path d="M11 12h1v4h1" />
+                        </svg>
+                    </button>
                     <button (click)="openInfoForm(mascota)">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle"
                             width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
@@ -81,6 +91,42 @@
         </tbody>
     </table>
 </div>
+
+
+<div class="modal" [ngClass]="{'visible':isAddMedicament}">
+    <!-- Add Medicamento -->
+    <form class="modal__form" [ngClass]="{'visibleForm':isAddMedicament}">
+        <div class="modal__form--exit">
+            <svg (click)="closeModal()" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
+                width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M18 6l-12 12" />
+                <path d="M6 6l12 12" />
+            </svg>
+        </div>
+        <fieldset class="fieldset">
+            <legend class="fieldset__legend">Asign medicament to {{currentMascota.nombre}}</legend>
+            <div class="fieldset__inputs">
+                <div class="inputbox">
+                    <select [(ngModel)]="mascMed.idMedicamento" required="required" name="id" class="inputbox__field" type="number">
+                        <option value="" disabled selected>Seleccione un medicamento</option>
+                        <option *ngFor="let medicamento of medicamentos" [value]="medicamento.id">{{ medicamento.nombre }}</option>
+                    </select>
+                </div>
+                <div class="inputbox">
+                    <input [(ngModel)]="mascMed.dosis" type="text" required="required" name="username" class="inputbox__field">
+                    <span class="inputbox__placeholder">Dosis</span>
+                </div>
+                
+                <!-- <span *ngIf="!isUserValid" style="color: rgb(221,44,0);">{{message}}</span> -->
+                <input (click)="addMascMed()" type="submit" class="fieldset__inputs--submit" value="Add">
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+
 
 <div class="modal" [ngClass]="{'visible':isAdd}">
     <!-- Add -->
@@ -167,7 +213,7 @@
 </div>
 
 <!-- Edit -->
-<!-- <div class="modal" [ngClass]="{'visible':isEdit}">
+<div class="modal" [ngClass]="{'visible':isEdit}">
     <form class="modal__form" [ngClass]="{'visibleForm':isEdit}" action="">
         <div class="modal__form--exit">
             <svg (click)="closeModal()" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
@@ -182,31 +228,34 @@
             <legend class="fieldset__legend">Edit info</legend>
             <div class="fieldset__inputs">
                 <div class="inputbox">
-                    <input [(ngModel)]="currentClient.id" type="text" required="required" name="id" class="inputbox__field">
+                    <input [(ngModel)]="currentMascota.id" type="number" required="required" name="id" class="inputbox__field">
                     <span class="inputbox__placeholder">Dni</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentClient.nombre" type="text" required="required" name="username" class="inputbox__field">
+                    <input [(ngModel)]="currentMascota.nombre" type="text" required="required" name="username" class="inputbox__field">
                     <span class="inputbox__placeholder">Name</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentClient.apellido" type="text" required="required" name="lastname" class="inputbox__field">
-                    <span class="inputbox__placeholder">Last Name</span>
+                    <input [(ngModel)]="currentMascota.edad" type="number" required="required" name="edad" class="inputbox__field">
+                    <span class="inputbox__placeholder">Age</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentClient.direccion" type="text" required="required" name="address" class="inputbox__field">
-                    <span class="inputbox__placeholder">Address</span>
+                    <input [(ngModel)]="currentMascota.idCliente" type="number" required="required" name="idCliente" class="inputbox__field">
+                    <span class="inputbox__placeholder">Owner Dni</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentClient.telefono" type="tel number" required="required" name="phone" class="inputbox__field">
-                    <span class="inputbox__placeholder">Phone</span>
+                    <input [(ngModel)]="currentMascota.peso" type="number" required="required" name="peso" class="inputbox__field">
+                    <span class="inputbox__placeholder">Weight</span>
                 </div>
-                
+                <div class="inputbox">
+                    <input [(ngModel)]="currentMascota.raza" type="text" required="required" name="raza" class="inputbox__field">
+                    <span class="inputbox__placeholder">Breed</span>
+                </div>
                 <input (click)="editarUsuario()" type="submit" class="fieldset__inputs--submit" value="Save">
             </div>
         </fieldset>
     </form>
-</div> -->
+</div>
 
 <!-- Delete -->
 <div class="modal" [ngClass]="{'visible':isDelete}">

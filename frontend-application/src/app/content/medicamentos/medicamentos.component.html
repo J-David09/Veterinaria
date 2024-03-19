@@ -1,1 +1,146 @@
-<p>medicamentos works!</p>
+<div class="button-container">
+    <button (click)="openAddForm()" class="add-button">Add New
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M12 5l0 14" />
+            <path d="M5 12l14 0" />
+        </svg>
+    </button>
+</div>
+
+<div class="clientInfo">
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let medicamento of medicamentos">
+                <td>{{medicamento.id}}</td>
+                <td>{{medicamento.nombre}}</td>
+                <td>{{medicamento.descripcion}}</td>
+                <td>
+                    <button (click)="openEditForm(medicamento)">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil-up"
+                            width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                            <path d="M13.5 6.5l4 4" />
+                            <path d="M19 22v-6" />
+                            <path d="M22 19l-3 -3l-3 3" />
+                        </svg>
+                    </button>
+                    <button (click)="openDeleteForm(medicamento)">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24"
+                            height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M4 7l16 0" />
+                            <path d="M10 11l0 6" />
+                            <path d="M14 11l0 6" />
+                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal" [ngClass]="{'visible':isAdd}">
+    <!-- Add -->
+    <form class="modal__form" [ngClass]="{'visibleForm':isAdd}">
+        <div class="modal__form--exit">
+            <svg (click)="closeModal()" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
+                width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M18 6l-12 12" />
+                <path d="M6 6l12 12" />
+            </svg>
+        </div>
+        <fieldset class="fieldset">
+            <legend class="fieldset__legend">Add new Medicamento</legend>
+            <div class="fieldset__inputs">
+                <div class="inputbox">
+                    <input [(ngModel)]="currentMedicamento.id" type="number" required="required" name="id" class="inputbox__field">
+                    <span class="inputbox__placeholder">Id</span>
+                </div>
+                <div class="inputbox">
+                    <input [(ngModel)]="currentMedicamento.nombre" type="text" required="required" name="username" class="inputbox__field">
+                    <span class="inputbox__placeholder">Name</span>
+                </div>
+                <div class="inputbox">
+                    <input [(ngModel)]="currentMedicamento.descripcion" type="text" required="required" name="edad" class="inputbox__field">
+                    <span class="inputbox__placeholder">Description</span>
+                </div>
+                <!-- <span *ngIf="!isUserValid" style="color: rgb(221,44,0);">{{message}}</span> -->
+                <input (click)="addUser()" type="submit" class="fieldset__inputs--submit" value="Add">
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+
+<!-- Edit -->
+<div class="modal" [ngClass]="{'visible':isEdit}">
+    <form class="modal__form" [ngClass]="{'visibleForm':isEdit}" action="">
+        <div class="modal__form--exit">
+            <svg (click)="closeModal()" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
+                width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M18 6l-12 12" />
+                <path d="M6 6l12 12" />
+            </svg>
+        </div>
+        <fieldset class="fieldset">
+            <legend class="fieldset__legend">Edit Medicamento</legend>
+            <div class="fieldset__inputs">
+                <div class="inputbox">
+                    <input [(ngModel)]="currentMedicamento.id" type="text" required="required" name="id" class="inputbox__field">
+                    <span class="inputbox__placeholder">Dni</span>
+                </div>
+                <div class="inputbox">
+                    <input [(ngModel)]="currentMedicamento.nombre" type="text" required="required" name="username" class="inputbox__field">
+                    <span class="inputbox__placeholder">Name</span>
+                </div>
+                <div class="inputbox">
+                    <input [(ngModel)]="currentMedicamento.descripcion" type="text" required="required" name="lastname" class="inputbox__field">
+                    <span class="inputbox__placeholder">Description</span>
+                </div>
+                <input (click)="editarUsuario()" type="submit" class="fieldset__inputs--submit" value="Save">
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<!-- Delete -->
+<div class="modal" [ngClass]="{'visible':isDelete}">
+    <form class="modal__form" [ngClass]="{'visibleForm':isDelete}" action="">
+        <div class="modal__form--exit">
+            <svg (click)="closeModal()" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
+                width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M18 6l-12 12" />
+                <path d="M6 6l12 12" />
+            </svg>
+        </div>
+        <fieldset class="fieldset">
+            <legend class="fieldset__legend">Are you sure?</legend>
+            <div class="fieldset__inputs">
+                <!-- <h1>el cliente {{currentClient.nombre}} con dni {{currentClient.id}} sera elimindo</h1> -->
+                <input (click)="delete()" type="submit" class="fieldset__inputs--submit" value="Confirmar">
+            </div>
+        </fieldset>
+    </form>
+</div>

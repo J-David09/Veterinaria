@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { Cliente } from 'src/app/interfaces/cliente';
+import { MascMed } from 'src/app/interfaces/masc-med';
 import { Mascota } from 'src/app/interfaces/mascota';
+import { Medicamento } from 'src/app/interfaces/medicamento';
 import { MascotaService } from 'src/app/services/mascota.service';
+import { MedicamentoService } from 'src/app/services/medicamento.service';
 
 @Component({
   selector: 'app-mascotas',
@@ -13,8 +16,18 @@ export class MascotasComponent {
   isInfo:boolean = false;
   isEdit:boolean = false;
   isDelete:boolean = false;
+  isAddMedicament: boolean = false;
 
   mascotas: Mascota[] = [];
+
+  medicamentos: Medicamento [] = [];
+
+  mascMed : MascMed = {
+    idMascota: 0,
+    idMedicamento: 0,
+    dosis: "",
+    id: undefined
+  }
 
   currentMascota : Mascota = {
     id : 0,
@@ -33,13 +46,34 @@ export class MascotasComponent {
     telefono: ""
   }
 
-  constructor(private mascotaService: MascotaService) { }
+  constructor(private mascotaService: MascotaService,
+    private medicamentoService: MedicamentoService) { }
 
   ngOnInit() {
-    this.consultarUsuarios();
+    this.consultarMascotas();
   }
 
-  consultarUsuarios () {
+  consultarMedicamentos () {
+    this.medicamentoService.getAll().subscribe(response => {
+      this.medicamentos = response.data;
+    },
+    error => {
+      alert("Error al consultar medicamentos");
+    })
+  }
+
+  addMascMed () {
+    this.mascMed.idMedicamento = parseInt(this.mascMed.idMedicamento.toString())
+    this.medicamentoService.addMascMed(this.mascMed).subscribe(response => {
+      this.consultarMascotas ();
+      this.closeModal()
+    },
+    error => {
+      alert("Error al agregar medicamentos");
+    })
+  }
+
+  consultarMascotas () {
     this.mascotaService.getAll().subscribe(response => {
       this.mascotas = response.data;
       console.log(this.mascotas);
@@ -51,7 +85,7 @@ export class MascotasComponent {
 
   editarUsuario (){
     this.mascotaService.editUser(this.currentMascota.id, this.currentMascota).subscribe(response => {
-      this.consultarUsuarios;
+      this.consultarMascotas;
       this.closeModal();
     },
     error => {
@@ -62,7 +96,7 @@ export class MascotasComponent {
 
   addUser (){
     this.mascotaService.addUser(this.currentMascota).subscribe(response => {
-      this.consultarUsuarios();
+      this.consultarMascotas();
       this.closeModal();
     },
     error => {
@@ -73,7 +107,7 @@ export class MascotasComponent {
 
   delete () {
     this.mascotaService.delete(this.currentMascota.id).subscribe(response => {
-      this.consultarUsuarios();
+      this.consultarMascotas();
       this.closeModal();
     },
     error => {
@@ -112,11 +146,18 @@ export class MascotasComponent {
     this.currentMascota = mascota
   }
 
+  openAddMedicamentoForm(mascota: Mascota) {
+    this.consultarMedicamentos();
+    this.isAddMedicament = true;
+    this.currentMascota = mascota;
+  }
+
   closeModal() {    
     this.isAdd = false;
     this.isInfo = false;
     this.isEdit = false;
     this.isDelete = false;
+    this.isAddMedicament = false;
     this.currentMascota =  {
       id : 0,
       nombre : "",
@@ -132,5 +173,12 @@ export class MascotasComponent {
       direccion: "",
       telefono: ""
     }
+    this.mascMed = {
+      idMascota: 0,
+      idMedicamento: 0,
+      dosis: "",
+      id: undefined
+    }
+    
   }
 }
