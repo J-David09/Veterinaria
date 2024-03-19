@@ -17,15 +17,15 @@ class MascMedRepository @Inject()(protected val dbConfigProvider: DatabaseConfig
 
   private lazy val mascMedQuery = TableQuery[MascMedTable]
 
-  def getOne (id: String) = {
-    val mascMedById = mascMedQuery.filter(_.id === id)
-    db.run(mascMedById.result.headOption)
-  }
-
-  def getAll = {
-    val mascMedById = mascMedQuery.sortBy(_.id)
-    db.run(mascMedById.result)
-  }
+//  def getOne (id: String) = {
+//    val mascMedById = mascMedQuery.filter(_.id === id)
+//    db.run(mascMedById.result.headOption)
+//  }
+//
+//  def getAll = {
+//    val mascMedById = mascMedQuery.sortBy(_.id)
+//    db.run(mascMedById.result)
+//  }
 
 //  def create (mascMed: MascMed) = {
 //    val mascotaById = mascMedQuery.filter(_.id === mascMed.id)
