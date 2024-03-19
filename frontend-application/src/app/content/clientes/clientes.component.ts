@@ -32,7 +32,6 @@ export class ClientesComponent {
   consultarUsuarios () {
     this.clienteService.getAll().subscribe(response => {
       this.clientes = response.data;
-      console.log(this.clientes);
     },
     error => {
       alert("Error al consultar usuarios");
@@ -103,5 +102,6 @@ export class ClientesComponent {
       direccion: "",
       telefono: ""
     }
+    this.consultarUsuarios();
   }
 }
