@@ -17,26 +17,31 @@ class MascMedRepository @Inject()(protected val dbConfigProvider: DatabaseConfig
 
   private lazy val mascMedQuery = TableQuery[MascMedTable]
 
-//  def getOne (id: String) = {
-//    val mascMedById = mascMedQuery.filter(_.id === id)
-//    db.run(mascMedById.result.headOption)
-//  }
-//
-//  def getAll = {
-//    val mascMedById = mascMedQuery.sortBy(_.id)
-//    db.run(mascMedById.result)
-//  }
+  def getOne (id: Int) = {
+    val mascMedById = mascMedQuery.filter(_.id === id)
+    db.run(mascMedById.result.headOption)
+  }
 
-//  def create (mascMed: MascMed) = {
-//    val mascotaById = mascMedQuery.filter(_.id === mascMed.id)
-//    db.run(mascotaById.result.headOption).flatMap{
-//      case Some(_) => db.run(mascotaById.result.headOption)
-//      case None =>
-//        val insert = mascMedQuery += mascMed
-//        db.run(insert).flatMap(_ => getOne(mascMed.id))
-//    }
-//  }
-//
+  def getAll = {
+    val mascMedById = mascMedQuery.sortBy(_.id)
+    db.run(mascMedById.result)
+  }
+
+  def create (mascMed : MascMed) = {
+    val mascMedById = mascMedQuery.filter(_.id === mascMed.id)
+    db.run(mascMedById.result.headOption).flatMap{
+      case Some(_) => db.run(mascMedById.result.headOption)
+      case None =>
+        val insert = mascMedQuery += mascMed
+        db.run(insert).flatMap(_ => getOne(mascMed.id.getOrElse(0)))
+    }
+  }
+
+  def getByMascota (idMascota: Int) = {
+    val mascMedByIdMascota = mascMedQuery.filter(_.idMascota === idMascota)
+    db.run(mascMedByIdMascota.result)
+  }
+
 //  def update (id: Int, mascota: Mascota) = {
 //    val mascotaById = mascMedQuery.filter(_.id === mascota.id && mascota.id.equals(id))
 //    val update = mascotaById.update(mascota)
