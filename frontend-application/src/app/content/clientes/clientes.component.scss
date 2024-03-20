@@ -111,7 +111,7 @@ td button{
 
 .modal__form {    
     position: relative;
-    top: -100rem;
+    top: -200rem;
     transition: 0.5s;            
     background-color: var(--light-gray);
     width: min(70rem, 100%);        
@@ -223,4 +223,10 @@ td button{
 .fieldset__inputs--submit:hover{    
     cursor: pointer;
     background-color:  var(--dark-primary);
+}
+
+/* --- */
+.infoLabels{
+    overflow-y: scroll;
+    height: 40rem;
 }

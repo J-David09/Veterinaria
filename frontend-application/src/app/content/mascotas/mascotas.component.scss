@@ -68,7 +68,14 @@ th:last-child {
 }
 
 td {
+    text-align: center;
     background: var(--light-gray);
+}
+
+tr > td:nth-child(4){
+    display: flex; 
+    justify-content: center;   
+    align-items: center;            
 }
 
 td button{

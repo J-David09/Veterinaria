@@ -28,8 +28,9 @@
                 <td>{{mascota.id}}</td>
                 <td>{{mascota.nombre}}</td>
                 <td>{{mascota.edad}}</td>
-                <td>{{mascota.idCliente}} 
-                    <button (click)="openInfoForm(mascota)">
+                <td>
+                    {{mascota.idCliente}}
+                    <button (click)="openOwnerInfoForm(mascota)">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle"
                             width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -44,24 +45,14 @@
                 <td>{{mascota.raza}}</td>
                 <td>
                     <button (click)="openAddMedicamentoForm(mascota)">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle"
-                            width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
-                            <path d="M12 9h.01" />
-                            <path d="M11 12h1v4h1" />
-                        </svg>
-                    </button>
-                    <button (click)="openInfoForm(mascota)">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle"
-                            width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
-                            <path d="M12 9h.01" />
-                            <path d="M11 12h1v4h1" />
-                        </svg>
+                        <svg (click)="closeModal()" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-vaccine-bottle" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M9 3m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v1a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                            <path d="M10 6v.98c0 .877 -.634 1.626 -1.5 1.77c-.866 .144 -1.5 .893 -1.5 1.77v8.48a2 2 0 0 0 2 2h6a2 2 0 0 0 2 -2v-8.48c0 -.877 -.634 -1.626 -1.5 -1.77a1.795 1.795 0 0 1 -1.5 -1.77v-.98" />
+                            <path d="M7 12h10" />
+                            <path d="M7 18h10" />
+                            <path d="M11 15h2" />
+                          </svg>    
                     </button>
                     <button (click)="openEditForm(mascota)">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil-up"
@@ -92,11 +83,10 @@
     </table>
 </div>
 
-
+<!-- Assign medicament -->
 <div class="modal" [ngClass]="{'visible':isAddMedicament}">
-    <!-- Add Medicamento -->
     <form class="modal__form" [ngClass]="{'visibleForm':isAddMedicament}">
-        <div class="modal__form--exit">
+        <div class="modal__form--exit">        
             <svg (click)="closeModal()" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
                 width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -109,16 +99,19 @@
             <legend class="fieldset__legend">Asign medicament to {{currentMascota.nombre}}</legend>
             <div class="fieldset__inputs">
                 <div class="inputbox">
-                    <select [(ngModel)]="mascMed.idMedicamento" required="required" name="id" class="inputbox__field" type="number">
+                    <select [(ngModel)]="mascMed.idMedicamento" required="required" name="id" class="inputbox__field"
+                        type="number">
                         <option value="" disabled selected>Seleccione un medicamento</option>
-                        <option *ngFor="let medicamento of medicamentos" [value]="medicamento.id">{{ medicamento.nombre }}</option>
+                        <option *ngFor="let medicamento of medicamentos" [value]="medicamento.id">{{ medicamento.nombre
+                            }}</option>
                     </select>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="mascMed.dosis" type="text" required="required" name="username" class="inputbox__field">
+                    <input [(ngModel)]="mascMed.dosis" type="text" required="required" name="username"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Dosis</span>
                 </div>
-                
+
                 <!-- <span *ngIf="!isUserValid" style="color: rgb(221,44,0);">{{message}}</span> -->
                 <input (click)="addMascMed()" type="submit" class="fieldset__inputs--submit" value="Add">
             </div>
@@ -126,10 +119,8 @@
     </form>
 </div>
 
-
-
+<!-- Add -->
 <div class="modal" [ngClass]="{'visible':isAdd}">
-    <!-- Add -->
     <form class="modal__form" [ngClass]="{'visibleForm':isAdd}">
         <div class="modal__form--exit">
             <svg (click)="closeModal()" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
@@ -144,27 +135,33 @@
             <legend class="fieldset__legend">Add new pet</legend>
             <div class="fieldset__inputs">
                 <div class="inputbox">
-                    <input [(ngModel)]="currentMascota.id" type="number" required="required" name="id" class="inputbox__field">
+                    <input [(ngModel)]="currentMascota.id" type="number" required="required" name="id"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Dni</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentMascota.nombre" type="text" required="required" name="username" class="inputbox__field">
+                    <input [(ngModel)]="currentMascota.nombre" type="text" required="required" name="username"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Name</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentMascota.edad" type="number" required="required" name="edad" class="inputbox__field">
+                    <input [(ngModel)]="currentMascota.edad" type="number" required="required" name="edad"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Age</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentMascota.idCliente" type="number" required="required" name="idCliente" class="inputbox__field">
+                    <input [(ngModel)]="currentMascota.idCliente" type="number" required="required" name="idCliente"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Owner Dni</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentMascota.peso" type="number" required="required" name="peso" class="inputbox__field">
+                    <input [(ngModel)]="currentMascota.peso" type="number" required="required" name="peso"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Weight</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentMascota.raza" type="text" required="required" name="raza" class="inputbox__field">
+                    <input [(ngModel)]="currentMascota.raza" type="text" required="required" name="raza"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Breed</span>
                 </div>
                 <!-- <span *ngIf="!isUserValid" style="color: rgb(221,44,0);">{{message}}</span> -->
@@ -174,9 +171,9 @@
     </form>
 </div>
 
-<!-- Info -->
-<div class="modal" [ngClass]="{'visible':isInfo}">
-    <form class="modal__form" [ngClass]="{'visibleForm':isInfo}" action="">
+<!-- Owner Info -->
+<div class="modal" [ngClass]="{'visible':isOwnerInfo}">
+    <div class="modal__form" [ngClass]="{'visibleForm':isOwnerInfo}">
         <div class="modal__form--exit">
             <svg (click)="closeModal()" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
                 width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
@@ -186,7 +183,7 @@
                 <path d="M6 6l12 12" />
             </svg>
         </div>
-        <fieldset class="fieldset">
+        <div class="fieldset">
             <legend class="fieldset__legend">Info of {{currentMascota.nombre}}</legend>
             <div class="fieldset__inputs">
                 <div class="infoLabel">
@@ -205,11 +202,9 @@
                     <h2>Client Phone</h2>
                     <p>{{client.telefono}}</p>
                 </div>
-                <!-- <span *ngIf="!isUserValid" style="color: rgb(221,44,0);">{{message}}</span> -->
-                <!-- <input type="submit" class="fieldset__inputs--submit" value="Add"> -->
             </div>
-        </fieldset>
-    </form>
+        </div>
+    </div>
 </div>
 
 <!-- Edit -->
@@ -228,27 +223,33 @@
             <legend class="fieldset__legend">Edit info</legend>
             <div class="fieldset__inputs">
                 <div class="inputbox">
-                    <input [(ngModel)]="currentMascota.id" type="number" required="required" name="id" class="inputbox__field">
+                    <input [(ngModel)]="currentMascota.id" type="number" required="required" name="id"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Dni</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentMascota.nombre" type="text" required="required" name="username" class="inputbox__field">
+                    <input [(ngModel)]="currentMascota.nombre" type="text" required="required" name="username"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Name</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentMascota.edad" type="number" required="required" name="edad" class="inputbox__field">
+                    <input [(ngModel)]="currentMascota.edad" type="number" required="required" name="edad"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Age</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentMascota.idCliente" type="number" required="required" name="idCliente" class="inputbox__field">
+                    <input [(ngModel)]="currentMascota.idCliente" type="number" required="required" name="idCliente"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Owner Dni</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentMascota.peso" type="number" required="required" name="peso" class="inputbox__field">
+                    <input [(ngModel)]="currentMascota.peso" type="number" required="required" name="peso"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Weight</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentMascota.raza" type="text" required="required" name="raza" class="inputbox__field">
+                    <input [(ngModel)]="currentMascota.raza" type="text" required="required" name="raza"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Breed</span>
                 </div>
                 <input (click)="editarUsuario()" type="submit" class="fieldset__inputs--submit" value="Save">
@@ -272,7 +273,7 @@
         <fieldset class="fieldset">
             <legend class="fieldset__legend">Are you sure?</legend>
             <div class="fieldset__inputs">
-                <!-- <h1>el cliente {{currentClient.nombre}} con dni {{currentClient.id}} sera elimindo</h1> -->
+                <!-- <h2>el cliente {{currentClient.nombre}} con dni {{currentClient.id}} sera eliminado</h2> -->
                 <input (click)="delete()" type="submit" class="fieldset__inputs--submit" value="Confirmar">
             </div>
         </fieldset>

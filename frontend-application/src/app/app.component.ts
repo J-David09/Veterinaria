@@ -40,6 +40,6 @@ export class AppComponent {
   }
 
   navigateHome() {
-    this.router.navigate([""]);
+    this.router.navigate(["/home"]);
   }
 }

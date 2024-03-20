@@ -12,8 +12,8 @@ import { MedicamentoService } from 'src/app/services/medicamento.service';
   styleUrls: ['./mascotas.component.scss']
 })
 export class MascotasComponent {
-  isAdd:boolean = false;;
-  isInfo:boolean = false;
+  isAdd:boolean = false;;  
+  isOwnerInfo:boolean = false;
   isEdit:boolean = false;
   isDelete:boolean = false;
   isAddMedicament: boolean = false;
@@ -130,11 +130,12 @@ export class MascotasComponent {
     this.isAdd = true;
   }
 
-  openInfoForm(mascota: Mascota) {
-    this.isInfo = true;
+  openOwnerInfoForm(mascota: Mascota) {
+    this.isOwnerInfo = true;
     this.currentMascota = mascota
     this.getOwner(this.currentMascota.idCliente);
   }
+
 
   openEditForm(mascota: Mascota) {
     this.isEdit = true;
@@ -153,8 +154,7 @@ export class MascotasComponent {
   }
 
   closeModal() {    
-    this.isAdd = false;
-    this.isInfo = false;
+    this.isAdd = false;    
     this.isEdit = false;
     this.isDelete = false;
     this.isAddMedicament = false;

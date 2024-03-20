@@ -85,23 +85,28 @@
             <legend class="fieldset__legend">Add new client</legend>
             <div class="fieldset__inputs">
                 <div class="inputbox">
-                    <input [(ngModel)]="currentClient.id" type="number" required="required" name="id" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.id" type="number" required="required" name="id"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Dni</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentClient.nombre" type="text" required="required" name="username" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.nombre" type="text" required="required" name="username"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Name</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentClient.apellido" type="text" required="required" name="lastname" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.apellido" type="text" required="required" name="lastname"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Last Name</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentClient.direccion" type="text" required="required" name="address" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.direccion" type="text" required="required" name="address"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Address</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentClient.telefono" type="tel number" required="required" name="phone" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.telefono" type="tel number" required="required" name="phone"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Phone</span>
                 </div>
                 <!-- <span *ngIf="!isUserValid" style="color: rgb(221,44,0);">{{message}}</span> -->
@@ -113,7 +118,7 @@
 
 <!-- Info -->
 <div class="modal" [ngClass]="{'visible':isInfo}">
-    <form class="modal__form" [ngClass]="{'visibleForm':isInfo}" action="">
+    <div class="modal__form" [ngClass]="{'visibleForm':isInfo}">
         <div class="modal__form--exit">
             <svg (click)="closeModal()" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
                 width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
@@ -123,71 +128,72 @@
                 <path d="M6 6l12 12" />
             </svg>
         </div>
-        <fieldset class="fieldset">
-            <legend class="fieldset__legend">Info <!-- {{name}} --></legend>
-            <div class="fieldset__inputs">
+        <legend class="fieldset__legend">Info <!-- {{name}} --></legend>
+        <div class="fieldset">
+            <div class="fieldset__inputs infoLabels">
                 <div class="infoLabel">
                     <h2>Client Id</h2>
-                    <p><!-- {{id}} -->Hola</p>
+                    <p><!-- {{id}} -->1000204474</p>
                 </div>
                 <div class="infoLabel">
                     <h2>Client Name</h2>
-                    <p><!-- {{nombre}} --></p>
+                    <p><!-- {{nombre}} -->Simon</p>
                 </div>
                 <div class="infoLabel">
-                    <h2>CLient Last Name</h2>
-                    <p><!-- {{apellido}} --></p>
+                    <h2>Client Last Name</h2>
+                    <p><!-- {{apellido}} -->Sanchez</p>
                 </div>
                 <div class="infoLabel">
                     <h2>Client Address</h2>
-                    <p><!-- {{direccion}} --></p>
+                    <p><!-- {{direccion}} -->Calle Laureles 30</p>
                 </div>
                 <div class="infoLabel">
                     <h2>Client Phone</h2>
-                    <p><!-- {{telefono}} --></p>
+                    <p><!-- {{telefono}} -->3046540076</p>
                 </div>
                 <div class="infoLabel">
                     <h2>Pet Id</h2>
-                    <p><!-- {{pet.id}} --></p>
+                    <p><!-- {{pet.id}} -->2</p>
                 </div>
                 <div class="infoLabel">
                     <h2>Pet Name</h2>
-                    <p><!-- {{mascota.nombre}} --></p>
+                    <p><!-- {{mascota.nombre}} -->Lupe</p>
                 </div>
                 <div class="infoLabel">
                     <h2>Pet Breed</h2>
-                    <p><!-- {{mascota.raza}} --></p>
+                    <p><!-- {{mascota.raza}} -->Pinsher</p>
                 </div>
                 <div class="infoLabel">
                     <h2>Pet Age</h2>
-                    <p><!-- {{mascota.edad}} --></p>
+                    <p><!-- {{mascota.edad}} -->13</p>
                 </div>
                 <div class="infoLabel">
                     <h2>Pet Weight</h2>
-                    <p><!-- mascota.peso --></p>
+                    <p><!-- mascota.peso -->4</p>
                 </div>
                 <!-- Ciclo (porque una mascota puede tener varios medicamentos) ngfor* -->
                 <div class="infoLabel">
                     <h2>Medication Id</h2>
-                    <p><!-- {{medicamento.id}} --></p>
+                    <p><!-- {{medicamento.id}} -->2</p>
                 </div>
                 <div class="infoLabel">
                     <h2>Medication Name</h2>
-                    <p><!-- {{medicamento.nombre}} --></p>
+                    <p><!-- {{medicamento.nombre}} -->Dolex niños</p>
                 </div>
                 <div class="infoLabel">
                     <h2>Medication Description</h2>
-                    <p><!-- {{medicamento.descripcion}} --></p>
+                    <p><!-- {{medicamento.descripcion}} -->Esto lo pone a volar...y a su perro lo pone a decir miau</p>
                 </div>
                 <div class="infoLabel">
                     <h2>Medication Dosage</h2>
-                    <p><!-- {{medicamento.dosis}} --></p>
+                    <p><!-- {{medicamento.dosis}} -->Hasta que sienta que el perro esta convulsionando</p>
                 </div>
                 <!-- <span *ngIf="!isUserValid" style="color: rgb(221,44,0);">{{message}}</span> -->
-                <input type="submit" class="fieldset__inputs--submit" value="Add">
+                <!-- <input type="submit" class="fieldset__inputs--submit" value="Add"> -->
             </div>
-        </fieldset>
-    </form>
+        </div>
+
+    </div>
 </div>
 
 <!-- Edit -->
@@ -206,23 +212,28 @@
             <legend class="fieldset__legend">Edit <!-- nombre --> info</legend>
             <div class="fieldset__inputs">
                 <div class="inputbox">
-                    <input [(ngModel)]="currentClient.id" type="text" required="required" name="id" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.id" type="text" required="required" name="id"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Dni</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentClient.nombre" type="text" required="required" name="username" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.nombre" type="text" required="required" name="username"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Name</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentClient.apellido" type="text" required="required" name="lastname" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.apellido" type="text" required="required" name="lastname"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Last Name</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentClient.direccion" type="text" required="required" name="address" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.direccion" type="text" required="required" name="address"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Address</span>
                 </div>
                 <div class="inputbox">
-                    <input [(ngModel)]="currentClient.telefono" type="tel number" required="required" name="phone" class="inputbox__field">
+                    <input [(ngModel)]="currentClient.telefono" type="tel number" required="required" name="phone"
+                        class="inputbox__field">
                     <span class="inputbox__placeholder">Phone</span>
                 </div>
                 <!-- <span *ngIf="!isUserValid" style="color: rgb(221,44,0);">{{message}}</span> -->
@@ -247,7 +258,7 @@
         <fieldset class="fieldset">
             <legend class="fieldset__legend">Are you sure?</legend>
             <div class="fieldset__inputs">
-                <h1>el cliente {{currentClient.nombre}} con dni {{currentClient.id}} sera elimindo</h1>
+                <h2>El cliente {{currentClient.nombre}} con dni {{currentClient.id}} sera elimindo</h2>
                 <input (click)="delete()" type="submit" class="fieldset__inputs--submit" value="Confirmar">
             </div>
         </fieldset>
